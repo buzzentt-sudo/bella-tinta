@@ -51,7 +51,7 @@ export default function Home() {
 
           <div className="nav-links">
             <a href="#trabajos">Trabajos</a>
-            <a href="#estilos">Estilos</a>
+            <a href="#proceso">Proceso</a>
             <a href="#nosotros">Nosotros</a>
             <a href="#faq">FAQ</a>
             <a href="#contacto">Contacto</a>
@@ -166,43 +166,70 @@ export default function Home() {
         </div>
       )}
 
-      {/* ESTILOS */}
-      <section id="estilos" className="section styles">
-        <p className="eyebrow">ESPECIALIDADES</p>
+      {/* PROCESO */}
+      <section id="proceso" className="section idea-section">
+        <p className="eyebrow">EL PROCESO</p>
 
-        <h2>Encontrá tu estilo</h2>
+        <h2>
+          Tu idea,
+          <br />
+          <span>hecha realidad.</span>
+        </h2>
 
-        <div className="style-list">
-          <div>
+        <p className="section-intro">
+          Cada tatuaje comienza con una idea. Nosotros nos encargamos de
+          convertirla en un diseño pensado especialmente para vos.
+        </p>
+
+        <div className="idea-list">
+          <div className="idea-item">
             <span>01</span>
-            <h3>Blackwork</h3>
+
+            <div>
+              <h3>Contanos tu idea</h3>
+
+              <p>
+                Mandanos una referencia, un dibujo o simplemente contanos
+                qué tenés en mente.
+              </p>
+            </div>
           </div>
 
-          <div>
+          <div className="idea-item">
             <span>02</span>
-            <h3>Fine Line</h3>
+
+            <div>
+              <h3>Diseñamos juntos</h3>
+
+              <p>
+                Trabajamos sobre tu idea para conseguir un diseño que
+                represente lo que buscás.
+              </p>
+            </div>
           </div>
 
-          <div>
+          <div className="idea-item">
             <span>03</span>
-            <h3>Realismo</h3>
-          </div>
 
-          <div>
-            <span>04</span>
-            <h3>Lettering</h3>
-          </div>
+            <div>
+              <h3>Lo llevamos a tu piel</h3>
 
-          <div>
-            <span>05</span>
-            <h3>Ornamental</h3>
-          </div>
-
-          <div>
-            <span>06</span>
-            <h3>Diseños personalizados</h3>
+              <p>
+                Coordinamos tu turno y convertimos el diseño en un tatuaje
+                único.
+              </p>
+            </div>
           </div>
         </div>
+
+        <a
+          href={whatsappUrl}
+          className="idea-button"
+          target="_blank"
+          rel="noreferrer"
+        >
+          CONSULTAR POR WHATSAPP
+        </a>
       </section>
 
       {/* NOSOTROS */}
@@ -266,8 +293,8 @@ export default function Home() {
             <summary>¿Qué estilos trabajan?</summary>
 
             <p>
-              Entre los estilos disponibles se encuentran Blackwork, Fine
-              Line, Realismo, Lettering, Ornamental y diseños personalizados.
+              Se pueden realizar diferentes estilos y diseños personalizados
+              según la idea de cada cliente.
             </p>
           </details>
         </div>

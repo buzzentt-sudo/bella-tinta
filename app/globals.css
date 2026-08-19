@@ -146,10 +146,16 @@ nav {
   color: #f1e5c8;
 }
 
+.section h2 span {
+  color: #c7a65a;
+}
+
 .section-intro {
+  max-width: 650px;
   color: #8e8390;
   margin-bottom: 60px;
   font-size: 16px;
+  line-height: 1.7;
 }
 
 /* GALERÍA */
@@ -275,48 +281,73 @@ nav {
   color: #e0c77a;
 }
 
-/* ESTILOS */
+/* PROCESO */
 
-.styles {
+.idea-section {
   border-top: 1px solid #33243d;
 }
 
-.style-list {
-  border-top: 1px solid #33243d;
+.idea-list {
   margin-top: 60px;
+  border-top: 1px solid #33243d;
 }
 
-.style-list div {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  padding: 30px 0;
+.idea-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 35px;
+  padding: 38px 0;
   border-bottom: 1px solid #33243d;
   transition: 0.3s ease;
 }
 
-.style-list div:hover {
-  padding-left: 20px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(90, 59, 112, 0.15),
-      transparent
-    );
+.idea-item:hover {
+  padding-left: 15px;
+  background: linear-gradient(
+    90deg,
+    rgba(90, 59, 112, 0.14),
+    transparent
+  );
 }
 
-.style-list span {
+.idea-item > span {
   color: #a98bc2;
   font-size: 13px;
+  letter-spacing: 2px;
 }
 
-.style-list h3 {
-  font-size: 35px;
-  font-weight: 400;
+.idea-item h3 {
   color: #f1e5c8;
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 12px;
 }
 
-/* SOBRE */
+.idea-item p {
+  max-width: 600px;
+  color: #9f939f;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.idea-button {
+  display: inline-block;
+  margin-top: 50px;
+  padding: 17px 28px;
+  background: #c7a65a;
+  color: #08090b;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.idea-button:hover {
+  background: #e0c77a;
+  transform: translateY(-2px);
+}
+
+/* NOSOTROS */
 
 .about {
   padding: 150px 30px;
@@ -589,8 +620,23 @@ footer a:hover {
     height: 350px;
   }
 
-  .style-list h3 {
-    font-size: 26px;
+  .idea-item {
+    grid-template-columns: 45px 1fr;
+    gap: 20px;
+    padding: 30px 0;
+  }
+
+  .idea-item h3 {
+    font-size: 24px;
+  }
+
+  .idea-item p {
+    font-size: 14px;
+  }
+
+  .idea-button {
+    width: 100%;
+    text-align: center;
   }
 
   .about {
