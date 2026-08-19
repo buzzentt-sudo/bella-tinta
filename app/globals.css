@@ -584,6 +584,11 @@ footer a:hover {
 @media (max-width: 900px) {
   .gallery {
     grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .gallery-image {
+    height: 300px;
   }
 }
 
@@ -612,12 +617,19 @@ footer a:hover {
     padding: 90px 20px;
   }
 
+  /* GALERÍA EN 2 COLUMNAS */
+
   .gallery {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .gallery-card {
+    border-radius: 2px;
   }
 
   .gallery-image {
-    height: 350px;
+    height: 240px;
   }
 
   .idea-item {
