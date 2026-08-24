@@ -3,14 +3,6 @@
 import { createClient } from '@/lib/supabase';
 import { useEffect, useState } from 'react';
 
-const whatsappMessage =
-  'Hola Bella Tinta, quiero consultar para reservar un turno para un tatuaje.';
-
-const whatsappUrl = `https://wa.me/5493442315080?text=${encodeURIComponent(
-  whatsappMessage
-)}`;
-
-const instagramUrl = 'https://www.instagram.com/bellatintaa_tatoo/';
 
 type Trabajo = {
   id: string;
@@ -23,7 +15,14 @@ export default function Home() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [trabajos, setTrabajos] = useState<Trabajo[]>([]);
+  const [siteContent, setSiteContent] = useState<any>({});
   const supabase = createClient();
+
+  const whatsappMessage = "Hola Bella Tinta, quiero consultar para reservar un turno para un tatuaje."; 
+  const whatsappNumber = siteContent.contact?.whatsapp || "5493442315080"; 
+  const instagramUsername = siteContent.contact?.instagram || "bellatintaa_tatoo"; 
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+  const instagramUrl = `https://www.instagram.com/${instagramUsername}/`;
 
   useEffect(() => {
     async function loadGallery() {
@@ -48,7 +47,27 @@ export default function Home() {
     }
 
     loadGallery();
+    loadSiteContent();
   }, []);
+
+  async function loadSiteContent() {
+    const { data, error } = await supabase
+      .from('site_content')
+      .select('section, content');
+
+    if (error) {
+      console.error('Error cargando contenido:', error);
+      return;
+    }
+
+    const result: any = {};
+
+    for (const item of data || []) {
+      result[item.section] = item.content;
+    }
+
+    setSiteContent(result);
+  }
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -1417,20 +1436,16 @@ export default function Home() {
         <section className="bt-hero">
           <div className="bt-hero-content">
             <p className="bt-eyebrow">
-              BELLA TINTA · TATTOO STUDIO
+              {siteContent.hero?.eyebrow || "BELLA TINTA · TATTOO STUDIO"}
             </p>
 
             <h1>
-              TU PIEL.
-              <br />
-              <span>TU HISTORIA.</span>
+              {siteContent.hero?.title || "TU PIEL. TU HISTORIA."}
             </h1>
 
             <p className="bt-hero-description">
-              Tatuajes pensados para vos. Diseños personalizados,
-              atención cercana y una obsesión por cada detalle.
+              {siteContent.hero?.description || "Tatuajes pensados para vos. Diseños personalizados, atención cercana y una obsesión por cada detalle."}
             </p>
-
             <div className="bt-hero-actions">
               <a
                 href={whatsappUrl}
@@ -1654,39 +1669,32 @@ export default function Home() {
 
         {/* ABOUT */}
 
-        <section id="nosotros" className="bt-about">
-          <div className="bt-about-inner">
-            <p className="bt-eyebrow">
-              03 · BELLA TINTA
-            </p>
+          {/* ABOUT */}
 
-            <h2>
-              Arte que
-              <br />
-              <span>queda en tu piel.</span>
-            </h2>
-
-            <div className="bt-about-text">
-              <p>
-                Cada tatuaje cuenta una historia. En Bella Tinta
-                buscamos transformar ideas en diseños únicos,
-                cuidando cada detalle para que el resultado
-                represente realmente a quien lo lleva.
+          <section id="nosotros" className="bt-about">
+            <div className="bt-about-inner">
+              <p className="bt-eyebrow">
+                {siteContent.about?.eyebrow || "03 · BELLA TINTA"}
               </p>
 
-              <p>
-                Trabajamos cada proyecto de manera personalizada.
-                Escuchamos la idea, pensamos el diseño y buscamos
-                que el resultado final sea algo que puedas sentir
-                propio durante muchos años.
-              </p>
+              <h2>
+                {siteContent.about?.title || "Arte que queda en tu piel."}
+              </h2>
+
+              <div className="bt-about-text">
+                <p>
+                  {siteContent.about?.paragraph1 || "Cada tatuaje cuenta una historia. En Bella Tinta buscamos transformar ideas en diseños únicos, cuidando cada detalle para que el resultado represente realmente a quien lo lleva."}
+                </p>
+
+                <p>
+                  {siteContent.about?.paragraph2 || "Trabajamos cada proyecto de manera personalizada. Escuchamos la idea, pensamos el diseño y buscamos que el resultado final sea algo que puedas sentir propio durante muchos años."}
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* FAQ */}
-
-        <section id="faq" className="bt-section">
+          {/* FAQ */}
+          <section id="faq" className="bt-section">
           <div className="bt-section-heading">
             <div>
               <p className="bt-eyebrow">
