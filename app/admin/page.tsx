@@ -40,9 +40,9 @@ type SiteContent = {
   };
 };
 
-const supabase = createClient();
 
 export default function AdminPage() {
+  const supabase = createClient();
   const [section, setSection] = useState<Section>('dashboard');
   const [loading, setLoading] = useState(true);
   const [userEmail, setUserEmail] = useState('');
