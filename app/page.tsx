@@ -1,5 +1,6 @@
 'use client';
 
+import { createClient } from '@/lib/supabase';
 import { useEffect, useState } from 'react';
 
 const whatsappMessage =
@@ -11,14 +12,43 @@ const whatsappUrl = `https://wa.me/5493442315080?text=${encodeURIComponent(
 
 const instagramUrl = 'https://www.instagram.com/bellatintaa_tatoo/';
 
-const trabajos = Array.from({ length: 21 }, (_, index) => ({
-  id: index + 1,
-  image: `/trabajo-${index + 1}.jpg`,
-}));
+type Trabajo = {
+  id: string;
+  image: string;
+  alt: string;
+};
+
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [trabajos, setTrabajos] = useState<Trabajo[]>([]);
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function loadGallery() {
+      const { data, error } = await supabase
+        .from('gallery')
+        .select('id, image_url, alt')
+        .eq('active', true)
+        .order('position', { ascending: true });
+
+      if (error) {
+        console.error('ERROR GALERIA:', error);
+        return;
+      }
+
+      setTrabajos(
+        (data || []).map((item) => ({
+          id: item.id,
+          image: item.image_url,
+          alt: item.alt || 'Tatuaje realizado en Bella Tinta',
+        }))
+      );
+    }
+
+    loadGallery();
+  }, []);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -1450,21 +1480,21 @@ export default function Home() {
                 key={trabajo.id}
                 className="bt-gallery-card"
                 onClick={() =>
-                  setSelectedImage(trabajo.id)
+                  setSelectedImage(trabajos.indexOf(trabajo) + 1)
                 }
-                aria-label={`Ver trabajo ${trabajo.id}`}
+                aria-label={`Ver trabajo ${trabajos.indexOf(trabajo) + 1}`}
                 type="button"
               >
                 <img
                   src={trabajo.image}
-                  alt={`Tatuaje realizado en Bella Tinta número ${trabajo.id}`}
+                  alt={trabajo.alt}
                   loading={
-                    trabajo.id <= 4 ? 'eager' : 'lazy'
+                    trabajos.indexOf(trabajo) < 4 ? 'eager' : 'lazy'
                   }
                 />
 
                 <span className="bt-gallery-number">
-                  {String(trabajo.id).padStart(2, '0')}
+                  {String(trabajos.indexOf(trabajo) + 1).padStart(2, '0')}
                 </span>
               </button>
             ))}
@@ -1509,8 +1539,8 @@ export default function Home() {
               }
             >
               <img
-                src={`/trabajo-${selectedImage}.jpg`}
-                alt={`Trabajo de tatuaje ${selectedImage}`}
+                src={trabajos[selectedImage - 1]?.image}
+                alt={trabajos[selectedImage - 1]?.alt || "Tatuaje realizado en Bella Tinta"}
               />
 
               <p className="bt-lightbox-counter">
