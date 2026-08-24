@@ -67,7 +67,8 @@ export default function Home() {
   }, [selectedImage]);
 
   useEffect(() => {
-    document.body.style.overflow = selectedImage !== null ? 'hidden' : '';
+    document.body.style.overflow =
+      selectedImage !== null ? 'hidden' : '';
 
     return () => {
       document.body.style.overflow = '';
@@ -530,6 +531,10 @@ export default function Home() {
           align-items: center;
         }
 
+        .bt-process-copy {
+          padding: 110px 7%;
+        }
+
         .bt-process-copy h2 {
           margin: 0;
           font-size: clamp(45px, 7vw, 78px);
@@ -551,6 +556,7 @@ export default function Home() {
         }
 
         .bt-process-list {
+          margin-right: 7%;
           border-top: 1px solid var(--line);
         }
 
@@ -873,6 +879,7 @@ export default function Home() {
           from {
             opacity: 0;
           }
+
           to {
             opacity: 1;
           }
@@ -1291,8 +1298,7 @@ export default function Home() {
 
         @media (prefers-reduced-motion: reduce) {
           *,
-          *::before,
-          *::after {
+          *::before {
             scroll-behavior: auto !important;
             animation-duration: 0.01ms !important;
             transition-duration: 0.01ms !important;
@@ -1302,9 +1308,13 @@ export default function Home() {
 
       <main className="bt-page">
         {/* NAVBAR */}
+
         <header className="bt-nav">
           <a href="#" className="bt-logo" aria-label="Bella Tinta">
-            <img src="/logo.jpg" alt="Bella Tinta Tattoo Studio" />
+            <img
+              src="/logo.jpg"
+              alt="Bella Tinta Tattoo Studio"
+            />
           </a>
 
           <nav className="bt-desktop-nav">
@@ -1329,6 +1339,7 @@ export default function Home() {
             onClick={() => setMenuOpen((value) => !value)}
             aria-label="Abrir menú"
             aria-expanded={menuOpen}
+            type="button"
           >
             <span />
             <span />
@@ -1337,23 +1348,29 @@ export default function Home() {
         </header>
 
         {/* MOBILE MENU */}
+
         {menuOpen && (
           <nav className="bt-mobile-menu">
             <a href="#trabajos" onClick={closeMenu}>
               TRABAJOS
             </a>
+
             <a href="#proceso" onClick={closeMenu}>
               PROCESO
             </a>
+
             <a href="#nosotros" onClick={closeMenu}>
               NOSOTROS
             </a>
+
             <a href="#faq" onClick={closeMenu}>
               FAQ
             </a>
+
             <a href="#contacto" onClick={closeMenu}>
               CONTACTO
             </a>
+
             <a
               href={whatsappUrl}
               target="_blank"
@@ -1366,9 +1383,12 @@ export default function Home() {
         )}
 
         {/* HERO */}
+
         <section className="bt-hero">
           <div className="bt-hero-content">
-            <p className="bt-eyebrow">BELLA TINTA · TATTOO STUDIO</p>
+            <p className="bt-eyebrow">
+              BELLA TINTA · TATTOO STUDIO
+            </p>
 
             <h1>
               TU PIEL.
@@ -1377,8 +1397,8 @@ export default function Home() {
             </h1>
 
             <p className="bt-hero-description">
-              Tatuajes pensados para vos. Diseños personalizados, atención
-              cercana y una obsesión por cada detalle.
+              Tatuajes pensados para vos. Diseños personalizados,
+              atención cercana y una obsesión por cada detalle.
             </p>
 
             <div className="bt-hero-actions">
@@ -1401,10 +1421,13 @@ export default function Home() {
         </section>
 
         {/* PORTFOLIO */}
+
         <section id="trabajos" className="bt-section">
           <div className="bt-section-heading">
             <div>
-              <p className="bt-eyebrow">01 · PORTFOLIO</p>
+              <p className="bt-eyebrow">
+                01 · PORTFOLIO
+              </p>
             </div>
 
             <div>
@@ -1415,8 +1438,8 @@ export default function Home() {
               </h2>
 
               <p className="bt-intro">
-                Una selección de tatuajes realizados en Bella Tinta. Tocá
-                cualquier imagen para verla en detalle.
+                Una selección de tatuajes realizados en Bella Tinta.
+                Tocá cualquier imagen para verla en detalle.
               </p>
             </div>
           </div>
@@ -1426,13 +1449,18 @@ export default function Home() {
               <button
                 key={trabajo.id}
                 className="bt-gallery-card"
-                onClick={() => setSelectedImage(trabajo.id)}
+                onClick={() =>
+                  setSelectedImage(trabajo.id)
+                }
                 aria-label={`Ver trabajo ${trabajo.id}`}
+                type="button"
               >
                 <img
                   src={trabajo.image}
                   alt={`Tatuaje realizado en Bella Tinta número ${trabajo.id}`}
-                  loading={trabajo.id <= 4 ? 'eager' : 'lazy'}
+                  loading={
+                    trabajo.id <= 4 ? 'eager' : 'lazy'
+                  }
                 />
 
                 <span className="bt-gallery-number">
@@ -1444,6 +1472,7 @@ export default function Home() {
         </section>
 
         {/* LIGHTBOX */}
+
         {selectedImage !== null && (
           <div
             className="bt-lightbox"
@@ -1456,6 +1485,7 @@ export default function Home() {
               className="bt-lightbox-close"
               onClick={closeGallery}
               aria-label="Cerrar galería"
+              type="button"
             >
               ×
             </button>
@@ -1467,13 +1497,16 @@ export default function Home() {
                 previousImage();
               }}
               aria-label="Trabajo anterior"
+              type="button"
             >
               ‹
             </button>
 
             <div
               className="bt-lightbox-content"
-              onClick={(event) => event.stopPropagation()}
+              onClick={(event) =>
+                event.stopPropagation()
+              }
             >
               <img
                 src={`/trabajo-${selectedImage}.jpg`}
@@ -1493,6 +1526,7 @@ export default function Home() {
                 nextImage();
               }}
               aria-label="Siguiente trabajo"
+              type="button"
             >
               ›
             </button>
@@ -1500,10 +1534,13 @@ export default function Home() {
         )}
 
         {/* PROCESS */}
+
         <section id="proceso" className="bt-process">
           <div className="bt-process-grid">
             <div className="bt-process-copy">
-              <p className="bt-eyebrow">02 · EL PROCESO</p>
+              <p className="bt-eyebrow">
+                02 · EL PROCESO
+              </p>
 
               <h2>
                 Tu idea,
@@ -1512,60 +1549,72 @@ export default function Home() {
               </h2>
 
               <p>
-                No se trata solamente de tatuar. Se trata de entender lo que
-                querés, trabajar la idea y convertirla en algo que realmente
-                quieras llevar en tu piel.
+                No se trata solamente de tatuar. Se trata de
+                entender lo que querés, trabajar la idea y
+                convertirla en algo que realmente quieras llevar
+                en tu piel.
               </p>
             </div>
 
             <div className="bt-process-list">
               <div className="bt-process-item">
-                <span className="bt-process-number">01</span>
+                <span className="bt-process-number">
+                  01
+                </span>
 
                 <div>
                   <h3>Contanos tu idea</h3>
 
                   <p>
-                    Mandanos una referencia, una imagen, un dibujo o
-                    simplemente contanos qué tenés en mente.
+                    Mandanos una referencia, una imagen, un
+                    dibujo o simplemente contanos qué tenés en
+                    mente.
                   </p>
                 </div>
               </div>
 
               <div className="bt-process-item">
-                <span className="bt-process-number">02</span>
+                <span className="bt-process-number">
+                  02
+                </span>
 
                 <div>
                   <h3>Diseñamos juntos</h3>
 
                   <p>
-                    Trabajamos la propuesta para encontrar una composición
-                    que funcione y represente tu idea.
+                    Trabajamos la propuesta para encontrar una
+                    composición que funcione y represente tu
+                    idea.
                   </p>
                 </div>
               </div>
 
               <div className="bt-process-item">
-                <span className="bt-process-number">03</span>
+                <span className="bt-process-number">
+                  03
+                </span>
 
                 <div>
                   <h3>Coordinamos</h3>
 
                   <p>
-                    Definimos los detalles y coordinamos el día y horario para
-                    realizar tu tatuaje.
+                    Definimos los detalles y coordinamos el día
+                    y horario para realizar tu tatuaje.
                   </p>
                 </div>
               </div>
 
               <div className="bt-process-item">
-                <span className="bt-process-number">04</span>
+                <span className="bt-process-number">
+                  04
+                </span>
 
                 <div>
                   <h3>Lo llevamos a tu piel</h3>
 
                   <p>
-                    Llegó el momento. Tu diseño pasa del papel a tu piel.
+                    Llegó el momento. Tu diseño pasa del papel
+                    a tu piel.
                   </p>
                 </div>
               </div>
@@ -1574,9 +1623,12 @@ export default function Home() {
         </section>
 
         {/* ABOUT */}
+
         <section id="nosotros" className="bt-about">
           <div className="bt-about-inner">
-            <p className="bt-eyebrow">03 · BELLA TINTA</p>
+            <p className="bt-eyebrow">
+              03 · BELLA TINTA
+            </p>
 
             <h2>
               Arte que
@@ -1586,25 +1638,30 @@ export default function Home() {
 
             <div className="bt-about-text">
               <p>
-                Cada tatuaje cuenta una historia. En Bella Tinta buscamos
-                transformar ideas en diseños únicos, cuidando cada detalle
-                para que el resultado represente realmente a quien lo lleva.
+                Cada tatuaje cuenta una historia. En Bella Tinta
+                buscamos transformar ideas en diseños únicos,
+                cuidando cada detalle para que el resultado
+                represente realmente a quien lo lleva.
               </p>
 
               <p>
-                Trabajamos cada proyecto de manera personalizada. Escuchamos
-                la idea, pensamos el diseño y buscamos que el resultado final
-                sea algo que puedas sentir propio durante muchos años.
+                Trabajamos cada proyecto de manera personalizada.
+                Escuchamos la idea, pensamos el diseño y buscamos
+                que el resultado final sea algo que puedas sentir
+                propio durante muchos años.
               </p>
             </div>
           </div>
         </section>
 
         {/* FAQ */}
+
         <section id="faq" className="bt-section">
           <div className="bt-section-heading">
             <div>
-              <p className="bt-eyebrow">04 · FAQ</p>
+              <p className="bt-eyebrow">
+                04 · FAQ
+              </p>
             </div>
 
             <div>
@@ -1618,55 +1675,72 @@ export default function Home() {
 
           <div className="bt-faq-list">
             <details>
-              <summary>¿Cómo puedo reservar un turno?</summary>
+              <summary>
+                ¿Cómo puedo reservar un turno?
+              </summary>
 
               <p>
-                Podés escribirnos directamente por WhatsApp. Contanos qué
-                tatuaje tenés en mente y te ayudamos con los próximos pasos.
+                Podés escribirnos directamente por WhatsApp.
+                Contanos qué tatuaje tenés en mente y te ayudamos
+                con los próximos pasos.
               </p>
             </details>
 
             <details>
-              <summary>¿Puedo llevar mi propio diseño?</summary>
+              <summary>
+                ¿Puedo llevar mi propio diseño?
+              </summary>
 
               <p>
-                Sí. Podés enviarnos tu diseño, referencia o idea para
-                conversar sobre cómo adaptarlo correctamente a un tatuaje.
+                Sí. Podés enviarnos tu diseño, referencia o idea
+                para conversar sobre cómo adaptarlo correctamente
+                a un tatuaje.
               </p>
             </details>
 
             <details>
-              <summary>¿Hacen diseños personalizados?</summary>
+              <summary>
+                ¿Hacen diseños personalizados?
+              </summary>
 
               <p>
-                Sí. Trabajamos las ideas de manera personalizada para buscar
-                un resultado que se adapte a lo que estás buscando.
+                Sí. Trabajamos las ideas de manera personalizada
+                para buscar un resultado que se adapte a lo que
+                estás buscando.
               </p>
             </details>
 
             <details>
-              <summary>¿Qué estilos trabajan?</summary>
+              <summary>
+                ¿Qué estilos trabajan?
+              </summary>
 
               <p>
-                Podemos trabajar diferentes estilos y propuestas. Lo ideal es
-                enviarnos tu referencia o idea para evaluar el proyecto.
+                Podemos trabajar diferentes estilos y propuestas.
+                Lo ideal es enviarnos tu referencia o idea para
+                evaluar el proyecto.
               </p>
             </details>
 
             <details>
-              <summary>¿Dónde puedo ver más trabajos?</summary>
+              <summary>
+                ¿Dónde puedo ver más trabajos?
+              </summary>
 
               <p>
-                En nuestro Instagram podés encontrar más trabajos, novedades
-                y contenido de Bella Tinta.
+                En nuestro Instagram podés encontrar más trabajos,
+                novedades y contenido de Bella Tinta.
               </p>
             </details>
           </div>
         </section>
 
         {/* INSTAGRAM */}
+
         <section className="bt-instagram">
-          <p className="bt-eyebrow">05 · SEGUINOS</p>
+          <p className="bt-eyebrow">
+            05 · SEGUINOS
+          </p>
 
           <h2>
             Más trabajos,
@@ -1675,8 +1749,8 @@ export default function Home() {
           </h2>
 
           <p>
-            Descubrí más tatuajes, novedades y contenido de Bella Tinta en
-            nuestro Instagram.
+            Descubrí más tatuajes, novedades y contenido de
+            Bella Tinta en nuestro Instagram.
           </p>
 
           <a
@@ -1690,8 +1764,11 @@ export default function Home() {
         </section>
 
         {/* CONTACT */}
+
         <section id="contacto" className="bt-contact">
-          <p className="bt-eyebrow">06 · CONTACTO</p>
+          <p className="bt-eyebrow">
+            06 · CONTACTO
+          </p>
 
           <h2>
             Hablemos
@@ -1700,33 +1777,49 @@ export default function Home() {
           </h2>
 
           <p>
-            ¿Ya sabés qué querés tatuarte? Escribinos y empezamos a darle
-            forma.
+            ¿Ya sabés qué querés tatuarte? Escribinos y empezamos
+            a darle forma.
           </p>
 
           <div className="bt-contact-buttons">
-            <a href={whatsappUrl} target="_blank" rel="noreferrer">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
               WHATSAPP
             </a>
 
-            <a href={instagramUrl} target="_blank" rel="noreferrer">
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
               INSTAGRAM
             </a>
           </div>
         </section>
 
         {/* FOOTER */}
+
         <footer className="bt-footer">
-          <div className="bt-footer-brand">BELLA TINTA</div>
+          <div className="bt-footer-brand">
+            BELLA TINTA
+          </div>
 
           <p>© 2026 Bella Tinta Tattoo</p>
 
-          <a href={instagramUrl} target="_blank" rel="noreferrer">
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
             @bellatintaa_tatoo
           </a>
         </footer>
 
         {/* FLOATING WHATSAPP */}
+
         <a
           href={whatsappUrl}
           target="_blank"
