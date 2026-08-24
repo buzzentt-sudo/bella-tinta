@@ -39,10 +39,15 @@ export default function AdminLoginPage() {
       });
 
     if (loginError || !data.user) {
-      setError('Email o contraseña incorrectos.');
-      setLoading(false);
-      return;
-    }
+    console.error("ERROR LOGIN SUPABASE:", loginError);
+
+    setError(
+      loginError?.message || "No se pudo iniciar sesión."
+    );
+
+    setLoading(false);
+    return;
+  }
 
     const { data: profile, error: profileError } =
       await supabase
@@ -182,7 +187,7 @@ export default function AdminLoginPage() {
         </footer>
       </section>
 
-      <style jsx global>{`
+      <style jsx global>{
         * {
           box-sizing: border-box;
         }
@@ -500,7 +505,7 @@ export default function AdminLoginPage() {
             font-size: 6px;
           }
         }
-      `}</style>
+      }</style>
     </main>
   );
 }
