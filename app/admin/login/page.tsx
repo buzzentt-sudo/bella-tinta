@@ -39,15 +39,15 @@ export default function AdminLoginPage() {
       });
 
     if (loginError || !data.user) {
-    console.error("ERROR LOGIN SUPABASE:", loginError);
+      console.error('ERROR LOGIN SUPABASE:', loginError);
 
-    setError(
-      loginError?.message || "No se pudo iniciar sesión."
-    );
+      setError(
+        loginError?.message || 'No se pudo iniciar sesión.'
+      );
 
-    setLoading(false);
-    return;
-  }
+      setLoading(false);
+      return;
+    }
 
     const { data: profile, error: profileError } =
       await supabase
@@ -56,11 +56,9 @@ export default function AdminLoginPage() {
         .eq('id', data.user.id)
         .single();
 
-    if (
-      profileError ||
-      !profile ||
-      profile.role !== 'admin'
-    ) {
+    if (profileError || !profile || profile.role !== 'admin') {
+      console.error('ERROR PERFIL:', profileError);
+
       await supabase.auth.signOut();
 
       setError(
@@ -126,9 +124,7 @@ export default function AdminLoginPage() {
 
               <div className="password-wrapper">
                 <input
-                  type={
-                    showPassword ? 'text' : 'password'
-                  }
+                  type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(event) =>
                     setPassword(event.target.value)
@@ -187,7 +183,7 @@ export default function AdminLoginPage() {
         </footer>
       </section>
 
-      <style jsx global>{
+      <style jsx global>{`
         * {
           box-sizing: border-box;
         }
@@ -233,8 +229,7 @@ export default function AdminLoginPage() {
           position: absolute;
           inset: -50%;
           opacity: 0.035;
-          background-image:
-            url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
           transform: rotate(8deg);
         }
 
@@ -391,6 +386,7 @@ export default function AdminLoginPage() {
           font-size: 7px;
           font-weight: 800;
           letter-spacing: 1px;
+          cursor: pointer;
         }
 
         .password-wrapper button:hover {
@@ -441,6 +437,7 @@ export default function AdminLoginPage() {
           transition:
             transform 0.2s ease,
             opacity 0.2s ease;
+          cursor: pointer;
         }
 
         .submit:hover:not(:disabled) {
@@ -505,7 +502,7 @@ export default function AdminLoginPage() {
             font-size: 6px;
           }
         }
-      }</style>
+      `}</style>
     </main>
   );
 }
