@@ -1498,13 +1498,20 @@ export default function AdminPage() {
           position: absolute;
           top: 9px;
           right: 9px;
-          width: 30px;
-          height: 30px;
+          width: 34px;
+          height: 34px;
           border: 0;
           border-radius: 50%;
-          background: rgba(0, 0, 0, 0.65);
+          background: #e53935;
           color: #fff;
-          font-size: 18px;
+          font-size: 20px;
+          font-weight: 900;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          z-index: 10;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.35);
         }
 
         .gallery-card > input {
